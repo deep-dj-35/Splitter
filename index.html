@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Splitter - Deep & Supriya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .names {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .turn {
+            font-size: 22px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #0077ff;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #0077ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #005edb;
+        }
+
+        .history {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+
+        .history div {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>💧 Water Splitter</h1>
+        <div class="names">Deep & Supriya</div>
+
+        <div class="turn" id="turnText">This Week: Deep</div>
+
+        <button onclick="nextTurn()">Next Week ➡️</button>
+
+        <div class="history" id="history"></div>
+    </div>
+
+    <script>
+        let current = localStorage.getItem('currentTurn') || 'Deep';
+        const turnText = document.getElementById('turnText');
+        const historyDiv = document.getElementById('history');
+
+        function updateUI() {
+            turnText.innerText = "This Week: " + current;
+        }
+
+        function nextTurn() {
+            current = current === 'Deep' ? 'Supriya' : 'Deep';
+            localStorage.setItem('currentTurn', current);
+
+            const date = new Date().toLocaleDateString();
+            const entry = document.createElement('div');
+            entry.innerText = date + " → " + current;
+            historyDiv.prepend(entry);
+
+            updateUI();
+        }
+
+        updateUI();
+    </script>
+</body>
+
+</html>
